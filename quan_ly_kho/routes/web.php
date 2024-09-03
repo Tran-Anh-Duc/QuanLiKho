@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 
 Route::get('/login', [AclUserController::class, 'showViewLogIn'])->name('whLogin.viewLogin');
+Route::post('/register_user', [AclUserController::class, 'store_register'])->name('whLogin.viewRegister');

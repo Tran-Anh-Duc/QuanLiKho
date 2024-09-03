@@ -7,46 +7,33 @@ use Illuminate\Http\Request;
 
 class AclUserController extends Controller
 {
-    protected $repository;
+    protected $aclUserRepository;
 
-    public function __construct(AclUserRepository $repository)
+    public function __construct(AclUserRepository $aclUserRepository)
     {
-        $this->repository = $repository;
+        $this->aclUserRepository = $aclUserRepository;
     }
 
     function showViewLogIn(){
-        
+
         return view('LoginAndRegister.LogInAndRegister');
     }
 
 
-    public function index()
+    public function store_register(Request $request)
     {
-        $users = $this->repository->all();
-        return response()->json($users);
-    }
+        echo "<pre>";
+        echo "URL: " . $request->url() . "\n";
+        echo "Method: " . $request->method() . "\n";
+        echo "Headers: " . json_encode($request->headers->all(), JSON_PRETTY_PRINT) . "\n";
+        echo "Query Parameters: " . json_encode($request->query(), JSON_PRETTY_PRINT) . "\n";
+        echo "Input Data: " . json_encode($request->all(), JSON_PRETTY_PRINT) . "\n";
+        echo "</pre>";
+        die();
+        $data = $request->all();
 
-    public function show($id)
-    {
-        $user = $this->repository->find($id);
-        return response()->json($user);
-    }
-
-    public function store(Request $request)
-    {
-        $user = $this->repository->create($request->all());
+        $user = $this->aclUserRepository->create($request->all());
         return response()->json($user, 201);
     }
 
-    public function update(Request $request, $id)
-    {
-        $user = $this->repository->update($id, $request->all());
-        return response()->json($user);
-    }
-
-    public function destroy($id)
-    {
-        $this->repository->delete($id);
-        return response()->json(null, 204);
-    }
 }
