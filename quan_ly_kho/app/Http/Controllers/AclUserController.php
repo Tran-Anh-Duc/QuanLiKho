@@ -22,6 +22,7 @@ class AclUserController extends Controller
 
     public function store_register(Request $request)
     {
+
         echo "<pre>";
         echo "URL: " . $request->url() . "\n";
         echo "Method: " . $request->method() . "\n";
