@@ -15,6 +15,7 @@ class AclUserController extends Controller
     }
 
     function showViewLogIn(){
+        
         return view('LoginAndRegister.LogInAndRegister');
     }
 
